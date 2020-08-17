@@ -1,9 +1,11 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class ManagersSeeder extends Seeder
+class UsersSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,11 +14,12 @@ class ManagersSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('managers')->insert([
+        DB::table('users')->insert([
             [
-                'name'     => '管理者',
+                'name' => 'Admin',
                 'username' => 'admin',
                 'password' => bcrypt('admin'),
+                'email' => 'phuc.dovan.96@gmail.com',
             ],
         ]);
     }
