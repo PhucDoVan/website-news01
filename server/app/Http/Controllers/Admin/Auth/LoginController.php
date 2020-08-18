@@ -40,11 +40,12 @@ class LoginController extends Controller
         if ($request->isMethod('post')) {
             $username = $request->input("username");
             $password = $request->input("password");
+            $remember = $request->has('remember');
             $validator = $this->validator($request->all());
             if ($validator->fails()) {
                 return redirect()->route('admin.login')->withInput()->withErrors($validator);
             }
-            if (Auth::attempt(['username' => $username, 'password' => $password])) {
+            if (Auth::attempt(['username' => $username, 'password' => $password], $remember)) {
                 return redirect($this->redirectTo($request));
             } else {
                 return redirect()->route('admin.login')->withInput()->withErrors('UserName Or Password InCorrect !');

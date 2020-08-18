@@ -3,39 +3,16 @@
 <link rel="stylesheet" href="{{asset('css/login/style.css')}}">
 @section('content')
     <!-- Sing in  Form -->
-    <section class="sign-in">
-        <div class="container">
-            <div class="signin-content">
-                <div class="signin-image">
-                    <figure><img src="{{asset('images/signin-image.jpg')}}" alt="sing up image"></figure>
-                    <a href="" class="signup-image-link">Create an account</a>
-                </div>
-
-                <div class="signin-form">
-                    <h2 class="form-title">Sign up</h2>
-                    <form method="POST" class="register-form" id="login-form">
-                        @csrf
-                        <div class="form-group">
-                            <label for="username"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                            <input type="text" name="username" placeholder="Username" value="{{old('username')}}"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="password"><i class="zmdi zmdi-lock"></i></label>
-                            <input type="password" name="password" placeholder="Password" value="{{old('password')}}"/>
-                        </div>
-                        <div class="form-group">
-                            <input type="checkbox" name="remember_me" id="remember_me" class="agree-term" value="{{ old('remember') ? 'checked' : '' }}">
-                            <label for="remember_me" class="label-agree-term">Remember me</label>
-                        </div>
-                        <div class="form-group">
-                            <label class="label-agree-term"><span><span></span></span>
-                                <a href="{{route('admin.forgot_password')}}">Forgot password</a>
-                            </label>
-                        </div>
-                        <div class="form-group form-button">
-                            <input type="submit" name="signin" class="form-submit" value="Log In"/>
-                        </div>
-                    </form>
+    <div class="container">
+        <div class="d-flex justify-content-center h-100">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Sign In</h3>
+                    <div class="d-flex justify-content-end social_icon">
+                        <a href="#"><i class="fab fa-facebook-square"></i></a>
+                        <a href="#"><i class="fab fa-google-plus-square"></i></a>
+                        <a href="#"><i class="fab fa-twitter-square"></i></a>
+                    </div>
                     @if(isset($errors))
                         <div class="alert-danger">
                             @foreach($errors->all() as $error)
@@ -48,16 +25,40 @@
                             {!! $message !!}
                         </div>
                     @endif
-                    <div class="social-login">
-                        <span class="social-label">Or login with</span>
-                        <ul class="socials">
-                            <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
-                            <li><a href="#"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li>
-                            <li><a href="#"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
-                        </ul>
+                </div>
+                <div class="card-body">
+                    <form method="POST" class="register-form" id="login-form">
+                        @csrf
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input type="text" name="username" class="form-control" placeholder="username" value="{{ old('username')  }}">
+
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                            </div>
+                            <input type="password" name="password" class="form-control" placeholder="password" value="{{ old('password') }}">
+                        </div>
+                        <div class="row align-items-center remember">
+                            <input type="checkbox" name="remember" id="remember_me" value="{{ old('remember') === 'on' ? 'checked' : '' }}">Remember Me
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" name="signin" value="Login" class="btn float-right login_btn">
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-center links">
+                        Don't have an account?<a href="#">Sign Up</a>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <a href="{{route('admin.forgot_password')}}">Forgot your password?</a>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 @endsection
