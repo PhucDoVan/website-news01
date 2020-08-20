@@ -1,19 +1,6 @@
 @extends('admin.layouts.master')
 @section('title', 'Login')
 <link rel="stylesheet" href="{{asset('css/login/style.css')}}">
-<script type="text/javascript">//<![CDATA[
-
-    window.onload=function(){
-
-        /**
-         * @author Abdo-Hamoud <abdo.host@gmail.com>
-         * https://github.com/Abdo-Hamoud/bootstrap-show-password
-         * version: 1.0
-         */
-        !function(a){a(function(){a('[data-toggle="password"]').each(function(){var b = a(this); var c = a(this).parent().find(".input-group-text"); c.css("cursor", "pointer").addClass("input-password-hide"); c.on("click", function(){if (c.hasClass("input-password-hide")){c.removeClass("input-password-hide").addClass("input-password-show"); c.find(".fa").removeClass("fa-eye").addClass("fa-eye-slash"); b.attr("type", "text")} else{c.removeClass("input-password-show").addClass("input-password-hide"); c.find(".fa").removeClass("fa-eye-slash").addClass("fa-eye"); b.attr("type", "password")}})})})}(window.jQuery);
-    }
-
-    //]]></script>
 @section('content')
     <!-- Sing in  Form -->
     <div class="container">
@@ -53,10 +40,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                             </div>
-                            <input type="password" name="password" id="password" class="form-control" data-toggle="password" placeholder="password" value="{{ old('password') }}"/>
-                            <div class="input-group-append">
-                                <div class="input-group-text"><i class="fa fa-eye"></i></div>
-                            </div>
+                            <input type="password" name="password" class="form-control js-password" data-toggle="password" placeholder="password" value="{{ old('password') }}"/>
+                            <span class="p-password__display js-togglePassword"></span>
                         </div>
                         <div class="row align-items-center remember">
                             <input type="checkbox" name="remember" id="remember_me" value="{{ old('remember') === 'on' ? 'checked' : '' }}"/>Remember Me
@@ -78,3 +63,21 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        if ($('.js-password').length) {
+            $('.js-togglePassword').click(function () {
+
+                $(this).toggleClass('-visible');
+
+                let input = $(this).prev('.js-password');
+                if (input.attr('type') == 'password') {
+                    input.attr('type', 'text');
+                } else {
+                    input.attr('type', 'password');
+                }
+            });
+        }
+    </script>
+@endpush

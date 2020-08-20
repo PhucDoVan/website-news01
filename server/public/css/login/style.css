@@ -87,3 +87,22 @@ input:focus{
 .links a{
     margin-left: 4px;
 }
+.p-password__display {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 13px;
+    margin: auto;
+    display: block;
+    width: 23px;
+    height: 13px;
+    background-image: url("/images/ico_visibale.svg");
+    background-repeat: no-repeat;
+    background-position: left top;
+    background-size: cover;
+    cursor: pointer;
+    z-index: 9999;
+}
+.p-password__display.-visible {
+    background-image: url("/images/ico_invisibale.svg");
+}
