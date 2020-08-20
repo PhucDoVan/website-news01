@@ -20,16 +20,16 @@ Route::get('/', function () {
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::group(['middleware' => 'guest'], function () {
         Route::get('login', 'Admin\Auth\LoginController@getLogin')->name('login');
-        Route::post('login', 'Admin\Auth\LoginController@postLogin')->name('login');
+        Route::post('login', 'Admin\Auth\LoginController@postLogin');
         Route::get('forgot_password', 'Admin\Auth\ForgotPasswordController@getFormResetPassword')->name('forgot_password');
-        Route::post('forgot_password', 'Admin\Auth\ForgotPasswordController@sendCodeResetPassword')->name('forgot_password');
+        Route::post('forgot_password', 'Admin\Auth\ForgotPasswordController@sendCodeResetPassword');
         Route::get('reset_password', 'Admin\Auth\ForgotPasswordController@getResetPassword')->name('reset_password');
-        Route::post('reset_password', 'Admin\Auth\ForgotPasswordController@postResetPassword')->name('reset_password');
+        Route::post('reset_password', 'Admin\Auth\ForgotPasswordController@postResetPassword');
     });
     Route::group(['middleware' => ['auth']], function () {
         Route::get('logout', 'Admin\Auth\LoginController@logout')->name('logout');
         Route::get('change_password', 'Admin\Auth\ChangePasswordController@getChangePassword')->name('change_password');
-        Route::post('change_password', 'Admin\Auth\ChangePasswordController@postChangePassword')->name('change_password');
+        Route::post('change_password', 'Admin\Auth\ChangePasswordController@postChangePassword');
         Route::get('menu', 'Admin\DashboardController@index')->name('menu');
         Route::get('profile', 'Admin\ProfilesController@getProfiles')->name('profiles');
         Route::post('profile', 'Admin\ProfilesController@postProfiles')->name('update_profiles');
