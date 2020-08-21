@@ -33,20 +33,21 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                             </div>
-                            <input type="text" name="username" class="form-control" placeholder="username" value="{{ old('username')  }}">
+                            <input type="text" name="username" class="form-control" placeholder="username" value="{{ old('username')  }}"/>
 
                         </div>
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                             </div>
-                            <input type="password" name="password" class="form-control" placeholder="password" value="{{ old('password') }}">
+                            <input type="password" name="password" class="form-control js-password" data-toggle="password" placeholder="password" value="{{ old('password') }}"/>
+                            <span class="p-password__display js-togglePassword"></span>
                         </div>
                         <div class="row align-items-center remember">
-                            <input type="checkbox" name="remember" id="remember_me" value="{{ old('remember') === 'on' ? 'checked' : '' }}">Remember Me
+                            <input type="checkbox" name="remember" id="remember_me" value="{{ old('remember') === 'on' ? 'checked' : '' }}"/>Remember Me
                         </div>
                         <div class="form-group">
-                            <input type="submit" name="signin" value="Login" class="btn float-right login_btn">
+                            <input type="submit" name="signin" value="Login" class="btn float-right login_btn"/>
                         </div>
                     </form>
                 </div>
@@ -62,3 +63,21 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        if ($('.js-password').length) {
+            $('.js-togglePassword').click(function () {
+
+                $(this).toggleClass('-visible');
+
+                let input = $(this).prev('.js-password');
+                if (input.attr('type') == 'password') {
+                    input.attr('type', 'text');
+                } else {
+                    input.attr('type', 'password');
+                }
+            });
+        }
+    </script>
+@endpush
