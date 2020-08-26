@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="base_url" content="{{ url('/') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="format-detection" content="telephone=no">
     <meta name="_token" content="{{ csrf_token() }}"/>
@@ -30,5 +31,6 @@
 <script src="{{asset(('js/jquery.min.js'))}}"></script>
 <script src="{{asset('js/main.js')}}"></script>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
+<script src="{{ asset('js/file_upload.js') }}"></script>
 </body>
 </html>

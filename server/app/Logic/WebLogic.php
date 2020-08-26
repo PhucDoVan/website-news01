@@ -18,27 +18,35 @@ class WebLogic
         return Profile::where('user_id', $userId)->get();
     }
 
-    public function upsertProfiles($parameters)
+    public function upsertProfiles($parameters, $userId)
     {
-        $userId = Auth::user()->id;
         DB::connection('mysql')->beginTransaction();
         try {
-            foreach ($parameters['user_profiles'] as $key => $profiles) {
-                $profile = new Profile();
-                $isExistImage  = file_exists(Upload::UploadPath.$profiles['image_tmp']);
-                if (! ($isExistImage || ($profiles['image_tmp'] && $this->moveImage($profiles['image_tmp'])))) {
-                    continue;
-                }
-                $profiles['user_id']   = $userId;
-                $profiles['avatar'] = $profiles['image_tmp'];
-
-                $profile::updateOrCreate(
-                    ['id' => data_get($profiles, 'id')],
-                    $profiles
-                );
+        foreach ($parameters['user_profiles_id'] as $key => $profilesId) {
+            $proFile = [
+                'user_id' => $userId,
+                'full_name' => $parameters['user_profiles_full_name'][$key],
+                'phone' => $parameters['user_profiles_phone'][$key],
+                'facebook' => $parameters['user_profiles_facebook'][$key],
+                'google' => $parameters['user_profiles_google'][$key],
+                'twitter' => $parameters['user_profiles_twitter'][$key],
+            ];
+            if ($parameters['user_profiles_image_tmp'][$key]
+                && $this->moveImage($parameters['user_profiles_image_tmp'][$key])) {
+                $proFile['avatar'] = $parameters['user_profiles_image_tmp'][$key];
             }
-            DB::connection('mysql')->commit();
-            return true;
+
+            if (!$profilesId && !isset($proFile['avatar'])) {
+                continue;
+            }
+
+            Profile::updateOrCreate(
+                ['id' => data_get($profilesId, 'id')],
+                $proFile
+            );
+        }
+        DB::connection('mysql')->commit();
+        return true;
         } catch (\Exception $exception) {
             DB::connection('mysql')->rollBack();
             Log::error('WebLogic.upsertProfiles', $exception->getTrace());

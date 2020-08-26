@@ -19,21 +19,23 @@ class ProfilesController extends Controller
         $this->webLogic = $webLogic;
     }
 
-    public function getProfiles()
+    public function getProfiles(Request $request)
     {
-        $userId     = Auth::user()->id;
-        $profiles      = $this->webLogic->getDetailProfile($userId);
-        if (! $profiles) {
+        $userId = Auth::user()->id;
+        $user = User::find($userId);
+        $profiles = $user->profiles()->get();
+        if (!$profiles) {
             abort(Response::HTTP_NOT_FOUND);
         }
         return view('admin.profiles.index', [
-            'profiles'       => $profiles
+            'profiles' => $profiles
         ]);
     }
 
-    public function postProfiles(Request $request )
+    public function postProfiles(Request $request)
     {
-        $this->webLogic->upsertProfiles( $request);
+        $userId = Auth::user()->id;
+        $this->webLogic->upsertProfiles($request, $userId);
         return redirect()->route('admin.profiles');
     }
 }
