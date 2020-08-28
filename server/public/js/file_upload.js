@@ -1,25 +1,5 @@
 $(document).ready(function () {
     const baseUrl = $('meta[name=base_url]').attr('content');
-    $('select[name="shop_selected"]').on('change', function () {
-        const sisShopId = $(this).val();
-        $.ajax({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content'),
-            },
-            url: baseUrl + '/admin/ajax/change_shop',
-            type: 'post',
-            data: {sis_shop_id: sisShopId},
-            success: function (data) {
-                if (data.statusText == 'success') {
-                    location.reload();
-                }
-            },
-            error: function (err) {
-                console.log('error: ', err);
-            },
-        });
-    });
-
     $('body').delegate('.img_select', 'change', function () {
         const formData = new FormData();
         const files = $(this)[0].files[0];

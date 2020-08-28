@@ -32,6 +32,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('change_password', 'Admin\Auth\ChangePasswordController@postChangePassword');
         Route::get('menu', 'Admin\DashboardController@index')->name('menu');
         Route::get('profile', 'Admin\ProfilesController@getProfiles')->name('profiles');
-        Route::post('profile', 'Admin\ProfilesController@postProfiles')->name('update_profiles');
+        Route::post('profile', 'Admin\ProfilesController@update')->name('update_profiles');
+        Route::prefix('ajax')->name('ajax.')->group(function () {
+            Route::post('upload_file', 'Admin\AjaxController@uploadFile')->name('upload_file');
+        });
     });
 });

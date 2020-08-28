@@ -23,8 +23,7 @@
                                                         <div class="col-xs-12">
                                                             <div
                                                                 class="form-img text-center mgbt-xs-15 p-fileup__item">
-                                                                <input name="user_profiles_id[]" type="hidden"
-                                                                       value="{{$val->id}}">
+
                                                                 <div class="img_preview">
                                                                     @if($val->avatar != '' && file_exists(\App\Enums\Property\Upload::UploadPath.$val->avatar))
                                                                         <img src="/upload/{{ $val->avatar }}"/>
@@ -35,10 +34,10 @@
                                                                     Image
                                                                 </button>
                                                                 <input type="file" class="img_select"
-                                                                       name="user_profiles_image[]" hidden>
+                                                                       name="user_profiles_image" hidden>
                                                                 <input class="img_tmp" type="hidden"
-                                                                       name="user_profiles_image_tmp[]"
-                                                                       value="{{ $val->avatar }}">
+                                                                       name="user_profiles_image_tmp"
+                                                                       value="{{ old('user_profiles_image_tmp') }}">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -51,7 +50,7 @@
                                                             <div class="row mgbt-xs-0">
                                                                 <div class="col-xs-9">
                                                                     <input type="text"
-                                                                           name="user_profiles_full_name[]"
+                                                                           name="full_name"
                                                                            placeholder="Full Name"
                                                                            value="{{ $val->full_name }}">
                                                                 </div>
@@ -83,7 +82,7 @@
                                                             <div class="row mgbt-xs-0">
                                                                 <div class="col-xs-9">
                                                                     <input type="text" id="datepicker-normal"
-                                                                           class="width-40 hasDatepicker">
+                                                                           class="hasDatepicker">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -93,7 +92,7 @@
                                                         <div class="col-sm-9 controls">
                                                             <div class="row mgbt-xs-0">
                                                                 <div class="col-xs-9">
-                                                                    <select class="width-40">
+                                                                    <select class="select__statusMarital">
                                                                         <option>Single</option>
                                                                         <option>Married</option>
                                                                     </select>
@@ -119,7 +118,7 @@
                                                             <div class="row mgbt-xs-0">
                                                                 <div class="col-xs-9">
                                                                     <input type="text" placeholder="Phone"
-                                                                           name="user_profiles_phone[]"
+                                                                           name="phone"
                                                                            value="{{ $val->phone }}">
                                                                 </div>
                                                             </div>
@@ -131,7 +130,7 @@
                                                             <div class="row mgbt-xs-0">
                                                                 <div class="col-xs-9">
                                                                     <input type="text" placeholder="facebook"
-                                                                           name="user_profiles_facebook[]"
+                                                                           name="facebook"
                                                                            value="{{ $val->facebook }}">
                                                                 </div>
                                                             </div>
@@ -143,7 +142,7 @@
                                                             <div class="row mgbt-xs-0">
                                                                 <div class="col-xs-9">
                                                                     <input type="text" placeholder="google"
-                                                                           name="user_profiles_google[]"
+                                                                           name="google"
                                                                            value="{{ $val->google }}">
                                                                 </div>
                                                             </div>
@@ -155,7 +154,7 @@
                                                             <div class="row mgbt-xs-0">
                                                                 <div class="col-xs-9">
                                                                     <input type="text" placeholder="twitter"
-                                                                           name="user_profiles_twitter[]"
+                                                                           name="twitter"
                                                                            value="{{ $val->twitter }}">
                                                                 </div>
                                                             </div>
@@ -174,15 +173,15 @@
                                                 <div class="form-group">
                                                     <div class="col-xs-12">
                                                         <div class="form-img text-center mgbt-xs-15 p-fileup__item">
-                                                            <input name="user_profiles_id[]" type="hidden" value="">
+                                                            <input name="user_profiles_id" type="hidden" value="">
                                                             <div class="img_preview"></div>
                                                             <button class="p-btn__inline" type="button"
                                                                     onclick="return clickUploadFile(this);">Upload Image
                                                             </button>
                                                             <input type="file" class="img_select"
-                                                                   name="user_profiles_image[]" hidden>
+                                                                   name="user_profiles_image" hidden>
                                                             <input class="img_tmp" type="hidden"
-                                                                   name="user_profiles_image_tmp[]" value="">
+                                                                   name="user_profiles_image_tmp" value="">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -194,9 +193,9 @@
                                                     <div class="col-sm-9 controls">
                                                         <div class="row mgbt-xs-0">
                                                             <div class="col-xs-9">
-                                                                <input type="text" name="user_profiles_full_name[]"
+                                                                <input type="text" name="full_name"
                                                                        placeholder="Full Name"
-                                                                       value="">
+                                                                       value="{{ old('full_name') }}">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -226,7 +225,7 @@
                                                         <div class="row mgbt-xs-0">
                                                             <div class="col-xs-9">
                                                                 <input type="text" id="datepicker-normal"
-                                                                       class="width-40 hasDatepicker">
+                                                                       class="hasDatepicker">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -236,7 +235,7 @@
                                                     <div class="col-sm-9 controls">
                                                         <div class="row mgbt-xs-0">
                                                             <div class="col-xs-9">
-                                                                <select class="width-40">
+                                                                <select class="select__statusMarital">
                                                                     <option>Single</option>
                                                                     <option>Married</option>
                                                                 </select>
@@ -262,8 +261,8 @@
                                                         <div class="row mgbt-xs-0">
                                                             <div class="col-xs-9">
                                                                 <input type="text" placeholder="Phone"
-                                                                       name="user_profiles_phone[]"
-                                                                       value="">
+                                                                       name="phone"
+                                                                       value="{{ old('phone') }}">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -274,8 +273,8 @@
                                                         <div class="row mgbt-xs-0">
                                                             <div class="col-xs-9">
                                                                 <input type="text" placeholder="facebook"
-                                                                       name="user_profiles_facebook[]"
-                                                                       value="">
+                                                                       name="facebook"
+                                                                       value="{{ old('facebook') }}">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -286,8 +285,8 @@
                                                         <div class="row mgbt-xs-0">
                                                             <div class="col-xs-9">
                                                                 <input type="text" placeholder="google"
-                                                                       name="user_profiles_google[]"
-                                                                       value="">
+                                                                       name="google"
+                                                                       value="{{ old('google') }}">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -298,8 +297,8 @@
                                                         <div class="row mgbt-xs-0">
                                                             <div class="col-xs-9">
                                                                 <input type="text" placeholder="twitter"
-                                                                       name="user_profiles_twitter[]"
-                                                                       value="">
+                                                                       name="twitter"
+                                                                       value="{{ old('twitter') }}">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -310,7 +309,7 @@
                                 @endif
                                 <div class="pd-20">
                                     <button class="btn vd_btn vd_bg-green col-md-offset-3" type="submit">
-                                        <span class="menu-icon"><i class="fa fa-fw fa-check"></i></span> Finish
+                                        <span class="menu-icon"><i class="fa fa-fw fa-check"></i></span> Update
                                     </button>
                                 </div>
                             </form>

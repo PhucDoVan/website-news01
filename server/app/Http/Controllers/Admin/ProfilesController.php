@@ -32,7 +32,7 @@ class ProfilesController extends Controller
         ]);
     }
 
-    public function postProfiles(Request $request)
+    public function update(Request $request)
     {
         $userId = Auth::user()->id;
         $this->webLogic->upsertProfiles($request, $userId);
