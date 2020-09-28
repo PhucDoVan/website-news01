@@ -21,6 +21,7 @@ class WebLogic
         DB::connection('mysql')->beginTransaction();
         try {
             $profile = $parameters;
+            $profile['full_name'] = $parameters['first_name'].$parameters['last_name'];
             if ($parameters['user_profiles_image_tmp']
                 && $this->moveImage($parameters['user_profiles_image_tmp'])) {
                 $profile['avatar'] = $parameters['user_profiles_image_tmp'];
